@@ -1,0 +1,38 @@
+<div *ngIf="data.length != 0">
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let col of columms">{{col.name}} <i [ngClass]="{'hidden': !col.haveInfo}" class="fa-solid fa-circle-info gray"></i></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data.slice(0, selectedValue)">
+                <td *ngFor="let value of item.values"><p *ngIf="!isImageUrl(value)">{{value}}</p><span class="container-image" *ngIf="isImageUrl(value)"><img src="{{value}}"/></span></td>
+                <td>
+                    <button class="r-b-style" (click)="toggleDropdown(item.id)">
+                        <i class="fa-solid fa-ellipsis-vertical gray"></i>
+                    </button>
+                    <div class="dropdown" [class.active]="dropdownActive === item.id">
+                        <div class="dropdown-content bor-5">
+                            <a *ngFor="let option of menuOptions" (click)="performAction(option.action, item.id)">{{ option.label }}</a>
+                        </div>
+                    </div>  
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="containerFlex m-15-t">
+        <div class="footerTable">
+            <div class="result">{{data.length}} Resultados</div>
+        </div>
+        <div class="chooseItems">
+            <select [(ngModel)]="selectedValue" (change)="onChange($event)">
+                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div *ngIf="data.length == 0">
+    <p class="centerText">No existen registros</p>
+</div> 

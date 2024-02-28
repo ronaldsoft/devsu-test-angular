@@ -1,0 +1,30 @@
+<div>
+    <div class="containerFlex m-15-b">
+        <div class="form-field">
+            <input 
+                type="text" 
+                [(ngModel)]="searchTerm"
+                class="form-control" 
+                placeholder="Search" 
+                size="20" 
+                maxlength="20" 
+                autocomplete="off"
+                (input)="onSearch()"/>
+        </div>
+        <button (click)="buttonAddProduct()" class="button boton-primary inline-block">Agregar</button>
+    </div>
+    <div class="backgroundPrimary p-25-r p-25-l p-25-t p-25-b bor-5">
+        <app-table [columms]="columms" [data]="filteredData" [menuOptions]="tableMenuOptions" (actionPerformed)="handleAction($event)"></app-table>   
+    </div>
+    <div #content class="modal-wrap">
+        <div class="modal-content bor-15">
+            <div class="modal-body bor-b-gray">
+                <p>¿Estas seguro que deseas eliminar el producto {{this.selectedItem.name}}?</p>
+            </div>
+            <div class="modal-header center">
+                <button type="submit" class="m-15-r boton-secondary" (click)="closeModal()">Cancelar</button>
+                <button type="submit" class="boton-primary" (click)="deleteItem()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

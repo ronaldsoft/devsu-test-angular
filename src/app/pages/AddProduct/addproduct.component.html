@@ -1,0 +1,58 @@
+<div>
+    <div class="backgroundPrimary w-500 p-25-r p-25-l p-25-t p-25-b bor-5">
+        <h1 class="center bor-b p-25-b">Formulario de {{this.pathID ? 'Actualización' : 'Registro'}}</h1>
+        <form [formGroup]="addProduct" (ngSubmit)="submitForm()">
+            <div class="col-12">
+                <div class="col-6 block p-25-r">
+                    <label for="text">ID</label>
+                    <input type="text" formControlName="ID" min="3" max="10" 
+                    [ngClass]="hasRequired('ID') ? 'b-red':''"
+                    [readonly]="isIdDisabled()"
+                    required>
+                    <div *ngIf="hasRequired('ID')" [ngClass]="hasRequired('ID') || validID ? 'red':''">El ID es requerido.</div>
+                    <div *ngIf="validID" [ngClass]="validID ? 'red':''">El ID ya existe.</div>
+                </div>
+                <div class="col-6 block">
+                    <label for="name">Nombre</label>
+                    <input type="text" formControlName="name" min="5" max="100" 
+                    [ngClass]="hasRequired('name') ? 'b-red':''"
+                    required>
+                    <div *ngIf="hasRequired('name')" [ngClass]="hasRequired('name') ? 'red':''">El nombre es requerido.</div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-6 block p-25-r">
+                    <label for="description">Descripción</label>
+                    <input type="text" formControlName="description" min="10" max="200" 
+                    [ngClass]="hasRequired('description') ? 'b-red':''"
+                    required>
+                    <div *ngIf="hasRequired('description')" [ngClass]="hasRequired('description') ? 'red':''">La descripción es requerido.</div>
+                </div>
+                <div class="col-6 block">
+                    <label for="logo">Logo</label>
+                    <input type="text" formControlName="logo" 
+                    [ngClass]="hasRequired('logo') ? 'b-red':''"
+                    required>
+                    <div *ngIf="hasRequired('logo')" [ngClass]="hasRequired('logo') ? 'red':''">El logo es requerido.</div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="col-6 block p-25-r">
+                    <label for="date-release">Fecha Liberación</label>
+                    <input type="date" formControlName="date-release" 
+                    [ngClass]="hasRequired('date-release') ? 'b-red':''"
+                    required>
+                    <div *ngIf="hasRequired('date-release')" [ngClass]="hasRequired('date-release') ? 'red':''">La fecha de liberación requerido.</div>
+                </div>
+                <div class="col-6 block">
+                    <label for="date-revision">Fecha Revisión</label>
+                    <input type="date" formControlName="date-revision" [readonly]="true">
+                </div>
+            </div>
+            <div class="center">
+                <button type="submit" class="m-15-r boton-secondary" (click)="resetForm()">Reiniciar</button>
+                <button type="submit" [disabled]="addProduct.invalid" class="boton-primary">{{this.pathID ? 'Actualizar':'Enviar'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
